@@ -1,11 +1,12 @@
 "use strict";
 
 var winston = require('winston'),
-  sentry = require('winston-sentry');;
+  sentry = require('winston-sentry');
 
 if(process.env.SENTRY_DSN) {
   new sentry({
-    patchGlobal : true
+    patchGlobal : true,
+    dsn         : process.env.SENTRY_DSN
   });
 }
 
@@ -25,7 +26,7 @@ module.exports = function(label) {
       level : 'error',
       dsn   : process.env.SENTRY_DSN
     };
-  };
+  }
 
   winston.loggers.add(label, loggers);
 
