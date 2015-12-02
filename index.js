@@ -30,5 +30,9 @@ module.exports = function(label) {
 
   winston.loggers.add(label, loggers);
 
+  if(process.env.NODE_ENV === 'test') {
+    winston.loggers.get(label).remove(winston.transports.Console);
+  }
+
   return winston.loggers.get(label);
 };
