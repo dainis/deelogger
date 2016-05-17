@@ -4,6 +4,7 @@ var winston = require('winston'),
   sentry = require('winston-sentry');
 
 require('winston-papertrail').Papertrail;
+require('winston-rollbar').Rollbar;
 
 if(process.env.SENTRY_DSN) {
   new sentry({
@@ -28,6 +29,16 @@ module.exports = function(label) {
       dsn   : process.env.SENTRY_DSN,
       handleExceptions : true
     };
+  }
+
+  if(process.env.ROLLBAR_ACCESS_TOKEN) {
+    loggers.Rollbar = {
+      rollbarAccessToken : process.env.ROLLBAR_ACCESS_TOKEN,
+      rollbarConfig : {
+        environment : process.env.NODE_ENV || 'dev'
+      },
+      silent : true
+    }
   }
 
   if(process.env.PAPERTRAIL_HOST && process.env.PAPERTRAIL_PORT) {
