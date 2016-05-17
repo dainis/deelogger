@@ -35,9 +35,10 @@ module.exports = function(label) {
     loggers.Rollbar = {
       rollbarAccessToken : process.env.ROLLBAR_ACCESS_TOKEN,
       rollbarConfig : {
-        environment : process.env.NODE_ENV || 'dev'
+        environment : process.env.NODE_ENV || 'dev',
+        verbose     : false
       },
-      silent : true
+      silent : false
     }
   }
 
